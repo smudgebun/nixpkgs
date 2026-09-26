@@ -6278,6 +6278,17 @@ with pkgs;
     enableCuda = false;
   };
 
+  opencv5 = callPackage ../development/libraries/opencv/5.x.nix {
+    pythonPackages = python3Packages;
+    # TODO: LTO does not work.
+    # https://github.com/NixOS/nixpkgs/issues/343123
+    enableLto = false;
+  };
+
+  opencv5WithoutCuda = opencv5.override {
+    enableCuda = false;
+  };
+
   opencv = opencv4;
 
   openstackclient = with python313Packages; toPythonApplication python-openstackclient;

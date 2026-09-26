@@ -1,0 +1,18 @@
+diff --git a/cmake/OpenCVFindLibsGrfmt.cmake b/cmake/OpenCVFindLibsGrfmt.cmake
+index 55a0a7fbde..e30a148db8 100644
+--- a/cmake/OpenCVFindLibsGrfmt.cmake
++++ b/cmake/OpenCVFindLibsGrfmt.cmake
+@@ -361,10 +361,12 @@ endif()
+ if(WITH_OPENEXR)
+   ocv_clear_vars(HAVE_OPENEXR)
+   ocv_clear_internal_cache_vars(OPENEXR_INCLUDE_PATHS OPENEXR_LIBRARIES OPENEXR_ILMIMF_LIBRARY OPENEXR_VERSION)
+-  include("${OpenCV_SOURCE_DIR}/cmake/OpenCVFindOpenEXR.cmake")
++  pkg_check_modules(OPENEXR OpenEXR)
+ 
+   if(OPENEXR_FOUND)
+     set(HAVE_OPENEXR YES)
++    set(OPENEXR_INCLUDE_PATHS ${OPENEXR_INCLUDE_DIRS})
++    set(OPENEXR_LIBRARIES ${OPENEXR_LIBRARIES})
+   else()
+     set(HAVE_OPENEXR NO)
+   endif()
